@@ -18,11 +18,33 @@ df
 
 # Commented out IPython magic to ensure Python compatibility.
 # %matplotlib inline
-plt.xlabel('area (sq feet)')
-plt.ylabel('price (USD)')
+plt.xlabel('area (sq feet)' , fontsize=20)
+plt.ylabel('price (USD)' , fontsize=20)
 plt.scatter(df.area,df.price, color='red', marker='+')
+plt.plot(df.area,reg.predict(df[['area']]),color='blue')
 
 reg= linear_model.LinearRegression()
 reg.fit(df[['area']],df.price)
 
 reg.predict(np.array([[3300]]))
+
+reg.coef_
+
+reg.intercept_
+
+price= (135.78767123*3300)+180616.43835616432
+price
+
+d= pd.read_csv('/content/drive/MyDrive/datasets/practice/areas.csv')
+
+d.head()
+
+p=reg.predict(d)
+
+d['prices']=p
+
+d.head()
+
+from google.colab import drive
+d.to_csv('/content/drive/MyDrive/prediction_result.csv', index=False)
+
